@@ -11,11 +11,26 @@
 </head>
 
 <body>
+    <section>
+        <div class="container">
+            <form action="/search" method="POST" role="search">
+                @csrf
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q"
+                        placeholder="Search users"> <span class="input-group-btn">
+                        <button type="submit" class="btn btn-dark text-white">
+                            S
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </section>
     <section class="mb-5 pb-5">
         <h1>ARTICLES</h1>
-        <div class="container">
+        <div class="container d-flex flex-wrap ">
             @foreach ($articles as $article)
-                <div class="card w-75">
+                <div class="card w-25 ">
                     <div class="card-body">
                         <h5 class="card-title">{{$article->name}}</h5>
                         @foreach ($article->tags as $tag)
@@ -29,9 +44,9 @@
 
     <section class="mt-5 pt-5">
         <h1>TAGS</h1>
-        <div class="container">
+        <div class="container d-flex flex-wrap">
             @foreach ($tags as $tag)
-                <div class="card w-75">
+                <div class="card w-25">
                     <div class="card-body">
                         <h5 class="card-title">{{$tag->name}}</h5>
                         @foreach ($tag->articles as $article)

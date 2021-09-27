@@ -4,7 +4,9 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TagController;
 use App\Models\Article;
 use App\Models\Tag;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\Console\Input\Input;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $articles = Article::all();
     $tags = Tag::all();
+    return view('welcome',compact('articles','tags'));
+});
+
+Route::post('/search', function (Request $request) {
+
+    $q = $request->q;
+    $articles = Article::where('name','LIKE','%'.$q.'%')->get();
+    $tags = Tag::where('name','LIKE','%'.$q.'%')->get();
+    // dd($q);
     return view('welcome',compact('articles','tags'));
 });
 
